@@ -1,5 +1,5 @@
 from npmscan4 import *
-import csv 
+import csv  
 
 url = 'https://replicate.npmjs.com/registry/_all_docs?include_docs=true'
 fh = urllib.urlopen(url)

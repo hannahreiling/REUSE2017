@@ -17,7 +17,7 @@ with open("DependencyGraph.csv", "w") as f:
 		k = row["key"]
 		key = "'%s'" % k
 		if skip_key(row, skipped, k): 
-				continue
+			continue
 		try:
 			dv = make_date_version_list(row, skipped, k)
 			latestVers = dv[-1][1]

@@ -7,10 +7,9 @@ def make_id2key(id2key):
 		idNum = 1
 		for row in freader:
 			try:
-				if row[1] > 1 and row[10] > 0:
-					key = row[0]
-					id2key[idNum] = key
-					idNum += 1
+				key = row[0]
+				id2key[idNum] = key
+				idNum += 1
 			except Exception as e:
 				print "Skipping1 because ", e
 

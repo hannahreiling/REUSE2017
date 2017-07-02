@@ -7,7 +7,7 @@ import urllib
 			
 url = 'https://replicate.npmjs.com/registry/_all_docs?include_docs=true'
 fh = urllib.urlopen(url)
-packages = ijson.items(fh, 'rows.item')
+packages = ijson.items(fh, 'rows.item') 
 with open("DependencyGraph.csv", "w") as f:
 	fwriter = csv.writer(f)
 	count = 0

@@ -30,16 +30,28 @@ def get_downloads_reg(key, writer, skipped, data): #if multiple keys in k
 	except Exception as e:
 		print_error_message(key, "3", e, skipped)
 
+def check_connectivity():
+	try:
+		urllib2.urlopen('http://216.58.192.142', timeout=1)
+		return True
+	except urllib2.URLError as err: 
+		print "ERROR: There is no internet"
+		return False
+
 def get_url(k, writer, skipped):
 	url = "http://api.npmjs.org/downloads/point/last-month/"
 	url = url + k #append all of the key names to the end of the url to get access to their downloads data
-	r = requests.get(url)
-	data = r.json() #put data into json format
-	if len(k.split(",")) > 1:
-		for key in k.split(","):
-			get_downloads_reg(key, writer, skipped, data)
+	connection = check_connectivity()
+	if connection:
+		r = requests.get(url)
+		data = r.json() #put data into json format
+		if len(k.split(",")) > 1:
+			for key in k.split(","):
+				get_downloads_reg(key, writer, skipped, data)
+		else:
+			get_downloads_one(k, writer, skipped, data)
 	else:
-		get_downloads_one(k, writer, skipped, data)
+		go_to_url(k, writer, skipped, row) #call function again and recheck if there is internet connection
 	
 def print_num_iterations(count):
 	if count%1000 == 0:

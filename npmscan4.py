@@ -118,24 +118,3 @@ def get_first_dep(dv, versiondep, numDepend): #number dependencies for first ver
 	else:
 		return "N/A"
 
-
-
-			
-			
-			
-
-				
-
-			
-
-
-
-
-				
-				
-
-		  
-	
-
-
-

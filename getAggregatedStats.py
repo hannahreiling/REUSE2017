@@ -1,5 +1,6 @@
 import csv
 import requests
+import urllib2
 
 def print_error_message(key, num, e, skipped):
 	print "Skipping ", num, " ", key, " because ", e
@@ -61,12 +62,24 @@ def get_stats(key, writer, skipped, data, row):
 	except Exception as e:
 		print_error_message(key, "0", e, skipped)
 
+def check_connectivity():
+	try:
+		urllib2.urlopen('http://216.58.192.142', timeout=1)
+		return True
+	except urllib2.URLError as e: 
+		print "ERROR: There is no internet"
+		return False
+
 def go_to_url(k, writer, skipped, row):
 	url = "https://api.npms.io/v2/package/"
 	url = url + k #append key name to the end of the url to get access to its aggregated statistics
-	r = requests.get(url)
-	data = r.json() #put data into json format
-	get_stats(key, writer, skipped, data, row)
+	connection = check_connectivity()
+	if connection:
+		r = requests.get(url)
+		data = r.json() #put data into json format
+		get_stats(key, writer, skipped, data, row)
+	else:
+		get_url(k, writer, skipped) #call function again and recheck if there is internet connection
 	
 def print_num_iterations(count):
 	if count%1000 == 0:

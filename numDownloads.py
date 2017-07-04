@@ -1,5 +1,6 @@
 import csv
 import requests
+import urllib2
 
 def print_error_message(key, num, e, skipped):
 	print "Skipping ", num, " ", key, " because ", e
@@ -34,7 +35,7 @@ def check_connectivity():
 	try:
 		urllib2.urlopen('http://216.58.192.142', timeout=1)
 		return True
-	except urllib2.URLError as err: 
+	except urllib2.URLError as e: 
 		print "ERROR: There is no internet"
 		return False
 

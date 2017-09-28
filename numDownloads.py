@@ -52,7 +52,7 @@ def get_url(k, writer, skipped):
 		else:
 			get_downloads_one(k, writer, skipped, data)
 	else:
-		go_to_url(k, writer, skipped, row) #call function again and recheck if there is internet connection
+		get_url(k, writer, skipped) #call function again and recheck if there is internet connection
 	
 def print_num_iterations(count):
 	if count%1000 == 0:
